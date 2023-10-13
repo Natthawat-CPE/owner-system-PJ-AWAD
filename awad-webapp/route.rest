@@ -1,0 +1,50 @@
+### Product
+GET http://localhost:3000/products/get
+
+###
+
+GET http://localhost:3000/products/get/6523cc8896270bbb2618b6cb
+
+###
+POST http://localhost:3000/products/create
+Content-Type: application/json
+
+{
+    "Product_Name": "กาแฟ",
+    "Product_Type": "Coffee",
+    "Product_IsHot": true,
+    "Product_IsCold": true,
+    "Product_IsFrappe": false,
+    "Product_Detail": "กาแฟตึงตึง",
+    "Product_Img": "https://www.cafe-amazon.com/BackEnd/TempProducts/9fc439a9db874ea3ad33cd3e04ce5aff.png"
+}
+
+### ProductType
+
+POST http://localhost:3000/productTypes/create
+Content-Type: application/json
+
+{
+    "ProductType_Name": "Coffee"
+}
+
+###
+
+GET http://localhost:3000/productTypes/get
+
+###
+
+GET http://localhost:3000/productTypes/get/6523c71f874858dcc18e2edc
+
+###
+
+DELETE http://localhost:3000/productTypes/delete/6523b111799e1ee07959ff46
+
+###
+
+PATCH http://localhost:3000/productTypes/patch/6523c71f874858dcc18e2edc
+Content-Type: application/json
+
+{
+    "ProductType_Name": "Coffee"
+}

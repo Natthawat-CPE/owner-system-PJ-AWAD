@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <!-- <button mat-button (click)="drawer.toggle()">
+        <a class="navbar-brand btn btn-dark">
+            <fa-icon [icon]="faBars" aria-hidden="true"></fa-icon>
+        </a>
+    </button> -->
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
+        aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a routerLink="/" class="navbar-brand btn btn-dark">
+        <fa-icon [icon]="faHouse" aria-hidden="true"></fa-icon>
+    </a>
+    
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="navbar-nav mr-auto mit-2 mt-lg-0">
+            <li class="nav-item">
+                <a routerLink="/products" class="btn btn-dark">Products</a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="/showproducttype" class="btn btn-dark">ProductTypes</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+  <!-- <mat-drawer-container autosize>
+    <mat-drawer #drawer class="custom-drawer" opened="true" mode="over" position="start">
+    <mat-nav-list>
+        <li>
+            <a routerLink="/" clss="center">Home</a>
+        </li>
+        <mat-list-item>
+            <button routerLink="/products" mat-button> Products</button>
+        </mat-list-item>
+        <mat-list-item>
+            <button routerLink="/showproducttype" mat-button> ProductTypes</button>
+        </mat-list-item>
+    </mat-nav-list>
+    </mat-drawer>
+    <mat-drawer-content>
+        <div style="text-align: center;min-height: 600px;">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-drawer-content>
+</mat-drawer-container> -->

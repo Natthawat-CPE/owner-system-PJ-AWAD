@@ -1,0 +1,38 @@
+<div class="container-fluid" style="background-color:#ffe092;">
+    <div class="row">
+        <div class="col-12" style="background-color:#58461887;">
+            <div class="text-white">
+                <div class="center">
+                    <h1 class="center display-3">ProductType</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="center" style="margin-top:30px">
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                    <div class="float-left">
+                        <h3>Update ProductType</h3>
+                    </div>
+                    
+                    <a routerLink="/showproducttype" (click)="updateProductType()" class="btn btn-warning float-right"><h6>Update</h6></a>
+            </div>
+            <div class="card-body">
+                <div>
+                    <form [formGroup]="productTypeData">
+                        <div class="form-group">
+                            <h5>ProductType Name</h5>
+                            <input type="text" class="form-control" formControlName="ProductType_Name">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="card-footer bg-warning">
+                <a routerLink="/showproducttype" class="btn btn-secondary float-left"><h6>Back</h6></a>
+                <a routerLink="/showproducttype" (click)="deleteProductType()" class="btn btn-danger float-right"><h6>Delete</h6></a>
+            </div>
+        </div>
+    </div>
+
+</div>

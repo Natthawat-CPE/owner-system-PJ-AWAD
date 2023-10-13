@@ -1,0 +1,35 @@
+<div class="container-fluid" style="background-color:#ffe092;">
+    <div class="row">
+        <div class="col-12" style="background-color:#58461887;">
+            <div class="text-white">
+                <div class="center">
+                    <h1 class="center display-3">ProductTypes</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="center" style="margin-top:30px">
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                    <div class="float-left">
+                        <h3>ProductType Name</h3>
+                    </div>
+                    
+                    <a routerLink="/showproducttype/createproducttype" class="btn btn-warning float-right"><h6>Create</h6></a>
+            </div>
+            <div class="card-body">
+                <div>
+                    <table class="table table-striped table-inverse">
+                        <tbody>
+                            <tr *ngFor="let item of productTypes;" routerLink="/showproducttype/producttype/{{item._id}}">
+                                <td><h6>{{item.ProductType_Name}}</h6></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
