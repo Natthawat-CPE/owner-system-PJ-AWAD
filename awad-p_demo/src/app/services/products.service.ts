@@ -42,7 +42,7 @@ export class ProductsService {
       }));
   }
 
-  updateProduct(product_id: any, productData: any) {
+  updateProduct (product_id: any, productData: any) {
     return this.http.patch<any>(`http://localhost:3000/products/patch/${product_id}`, productData)
       .pipe(map(data => {
         return data;

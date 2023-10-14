@@ -15,26 +15,38 @@
     
     <div class="row">
             
-            <div class="col-5" style="margin-left: auto ;" >
+            <div class="col-5" style="margin-left: auto ; margin-bottom: 5%"  >
                 <img src="{{product.Product_Img}}" width="70%" >
-                <form >
-                    <div class="form-group" >
-                        <label > Chang photo</label>
-                        <!-- <input type="file" class="form-control" [formControl]="Product_Img" > -->
-                        <input type="file" class="form-control" [formControl]="Product_Img"  (change)="onChangeImg($event)">
-                    </div>
-                </form>
+
+                    
             </div>
 
             <div class="col-5" style="margin-right: auto;"  >
                 <form [formGroup]="ProductForm">
                     <div class="form-group">
-                        <label >ProductName</label>
+                        <label ><h6>ProductName :</h6></label>
                         <input type="text" class="form-control" formControlName="Product_Name">
-                        <label >ProductDetail</label>
-                        <input type="text" class="form-control" formControlName="Product_Detail">
+                        <br>
+                        <label ><h6>ProductDetail :</h6></label>
+                        <!-- <input type="text" class="form-control" formControlName="Product_Detail"> -->
+                        <textarea class="form-control" formControlName="Product_Detail" cols="10" rows="4"></textarea>
+                        <br>
+                        <label ><h6>Chang photo :</h6></label>
+                        <!-- <input type="file" class="form-control" [formControl]="Product_Img" > -->
+                        <input type="file" class="form-control" formControlName="Product_Img"  (change)="onChangeImg($event)">
                     </div>
                 </form>
+
+                <div class="row">
+                    <div class="col-md-3">
+
+                    </div>
+                    <div class="col-md-9">
+                        <img *ngIf="previewLoaded" class="img-thumbnail" [src]="this.ProductForm.value.Product_Img" style="height:150px;">
+                    </div>
+                </div>
+
+
                 <a routerLink="/products" (click)="updateProduct()" class="btn btn-success float-right"><h6>Uadate</h6></a>
             </div>
     </div>

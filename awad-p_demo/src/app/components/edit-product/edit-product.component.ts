@@ -17,9 +17,10 @@ export class EditProductComponent {
   ProductForm = new FormGroup({
     Product_Name: new FormControl(''),
     Product_Detail: new FormControl(''),
+    Product_Img: new FormControl(''),
   });
 
-  Product_Img = new FormControl('');
+  // Product_Img = new FormControl('');
 
 
   // dataPatch = new FormGroup({
@@ -67,7 +68,8 @@ export class EditProductComponent {
     try {
       this.ProductForm.patchValue({
         Product_Name: this.product.Product_Name,
-        Product_Detail: this.product.Product_Detail
+        Product_Detail: this.product.Product_Detail,
+        Product_Img: this.product.Product_Img
       });
     } catch(err) {
       console.log(err);
@@ -75,29 +77,50 @@ export class EditProductComponent {
   }
 
 
+  // onChangeImg(e:any){
+  //     const file = e.target.files[0];
+  //     var pattern = /image-*/;
+  //     const reader = new FileReader();
+  //     if (!file.type.match(pattern)) {
+  //       alert('invalid format');
+  //       // this.Product_Img.reset();
+  //       this.ProductForm.patchValue({
+  //         Product_Img: null,
+  //       });
+  //     } 
+  //     else { 
+  //       reader.readAsDataURL(file);
+  //       reader.onload = () => {
+  //         this.previewLoaded = true;
+  //         // const imageValue = reader.result ? reader.result.toString() : null;
+  //         // this.Product_Img.setValue(imageValue);
+  //         this.ProductForm.patchValue({
+  //           Product_Img: reader.result?.toString()
+  //         })
+  //       }
+  //     }
+  // }
+
+
   onChangeImg(e:any){
+    if(e.target.files.length>0){
       const file = e.target.files[0];
-      var pattern = /image-*/;
       const reader = new FileReader();
-      if (!file.type.match(pattern)) {
-        alert('invalid format');
-        this.Product_Img.reset();
-      } 
-      else { 
-        reader.readAsDataURL(file);
-        reader.onload = () => {
-          this.previewLoaded = true;
-          const imageValue = reader.result ? reader.result.toString() : null;
-          this.Product_Img.setValue(imageValue);
-        }
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.previewLoaded = true;
+        this.ProductForm.patchValue({
+          Product_Img: reader.result?.toString()
+        })
       }
+    }
   }
 
   updateProduct() {
     let product_id = this.activatedRoute.snapshot.paramMap.get('id');
     console.log(this.ProductForm.value);
-    this.productService.updateProduct(product_id ,this.ProductForm.value).subscribe(
-      data => {
+    this.productService. updateProduct (product_id ,this.ProductForm.value).subscribe(
+       data => {
         console.log(data)
       },
       err => {
@@ -105,17 +128,17 @@ export class EditProductComponent {
       }
     );
 
-    if (this.Product_Img != null) {
-      this.productService.updateProduct(product_id ,this.Product_Img.value).subscribe(
-        data => {
-          console.log(data)
-        },
-        err => {
-          console.log(err);
-        }
-      );
+    // if (this.Product_Img != null) {
+    //   this.productService.updateProduct(product_id ,this.Product_Img.value).subscribe(
+    //     data => {
+    //       console.log(data)
+    //     },
+    //     err => {
+    //       console.log(err);
+    //     }
+    //   );
 
-    }
+    // }
   }
 
   // updateProduct() {

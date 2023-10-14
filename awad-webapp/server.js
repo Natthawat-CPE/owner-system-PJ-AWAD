@@ -3,6 +3,7 @@ require('dotenv').config()
 const expressFunction = require('express');
 const expressApp = expressFunction();
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 
 const url = process.env.DATABASE_URL;
 const config = {
@@ -17,6 +18,10 @@ expressApp.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Option, Authorization');
     return next();
 });
+
+expressApp.use(bodyParser.json({ limit: '10mb' }));
+expressApp.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
+
 expressApp.use(expressFunction.json());
 expressApp.use((req, res, next) => {
     mongoose.connect(url, config)
