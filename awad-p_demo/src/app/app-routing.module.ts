@@ -8,12 +8,15 @@ import { CreateproducttypeComponent } from './components/createproducttype/creat
 import { MenuComponent } from './components/menu/menu.component';
 import { HomeComponent } from './components/home/home.component';
 import { GoodsComponent } from './components/goods/goods.component';
+import { EditProductComponent } from './components/edit-product/edit-product.component';
 
 const routes: Routes = [
   { path: 'products', component: ProductsComponent },
   { path: 'home', component: HomeComponent },
   { path: '', redirectTo: 'home', pathMatch:'full' },
-  { path: 'products/goods/:id', component: GoodsComponent },
+  // เดิม
+  // { path: 'products/goods/:id', component: GoodsComponent },
+  { path: 'edit_product/:id', component: EditProductComponent },
   { path: 'showproducttype', component: ShowproducttypeComponent },
   { path: 'showproducttype/producttype/:id', component: ProducttypeDetailComponent },
   { path: 'showproducttype/createproducttype', component: CreateproducttypeComponent}

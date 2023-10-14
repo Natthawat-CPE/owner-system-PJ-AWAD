@@ -17,6 +17,7 @@ import { ProducttypeDetailComponent } from './components/producttype-detail/prod
 import { CreateproducttypeComponent } from './components/createproducttype/createproducttype.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
+import { EditProductComponent } from './components/edit-product/edit-product.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { MaterialModule } from './material/material.module';
     SearchComponent,
     ShowproducttypeComponent,
     ProducttypeDetailComponent,
-    CreateproducttypeComponent
+    CreateproducttypeComponent,
+    EditProductComponent
   ],
   imports: [
     BrowserModule,

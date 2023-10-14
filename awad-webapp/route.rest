@@ -10,12 +10,32 @@ POST http://localhost:3000/products/create
 Content-Type: application/json
 
 {
-    "Product_Name": "กาแฟ",
+    "Product_Name": "แบล็คคอฟฟี่22",
     "Product_Type": "Coffee",
     "Product_IsHot": true,
     "Product_IsCold": true,
     "Product_IsFrappe": false,
     "Product_Detail": "กาแฟตึงตึง",
+    "Product_Img": "https://www.cafe-amazon.com/BackEnd/TempProducts/9fc439a9db874ea3ad33cd3e04ce5aff.png"
+}
+
+###
+POST http://localhost:3000/products/create
+Content-Type: application/json
+
+{
+    "Product_Name": "asdasd",
+    "Product_Type": "Coffee", 
+    "Product_IsHot": true,
+    "Product_IsCold": true,
+    "Product_IsFrappe": true,
+    "Product_Detail_Hot": "กาแฟดำร้อน",
+    "Product_Detail_Cold": "กาแฟดำเย็น",
+    "Product_Detail_Smoothie": "กาแฟดำปั่น",
+    "Product_Price_Hot": 111,
+    "Product_Price_Cold": 222,
+    "Product_Price_Smoothie": 333,
+
     "Product_Img": "https://www.cafe-amazon.com/BackEnd/TempProducts/9fc439a9db874ea3ad33cd3e04ce5aff.png"
 }
 
@@ -42,9 +62,18 @@ DELETE http://localhost:3000/productTypes/delete/6523b111799e1ee07959ff46
 
 ###
 
-PATCH http://localhost:3000/productTypes/patch/6523c71f874858dcc18e2edc
+PATCH http://localhost:3000/productTypes/patch/652902b67cc33d6ebc5d5c58
 Content-Type: application/json
 
 {
-    "ProductType_Name": "Coffee"
+    "ProductType_Name": "1232"
+}
+###
+
+PATCH http://localhost:3000/products/patch/652902b67cc33d6ebc5d5c57
+Content-Type: application/json
+
+{
+    "Product_Name": "TEST update",
+    "Product_Detail": "asdasdasdadas "
 }
