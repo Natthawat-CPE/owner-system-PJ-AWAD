@@ -55,11 +55,11 @@ export class ProductsComponent implements OnInit {
   }
 
   // rest from service
-  getAllProducts() {
+  getAllProducts()  {
     try{
       this.productsService.restAllProducts().subscribe(
-        data => {
-          this.List_products = data;
+        data =>  {
+           this.List_products = data;
         },
         err => {
           console.log(err);

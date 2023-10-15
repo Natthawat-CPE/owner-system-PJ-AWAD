@@ -25,8 +25,15 @@ router.post('/create', async (req, res) => {
         Product_IsHot: req.body.Product_IsHot,
         Product_IsCold: req.body.Product_IsCold,
         Product_IsFrappe: req.body.Product_IsFrappe,
-        Product_Detail: req.body.Product_Detail,
-        Product_Img: req.body.Product_Img
+        Product_Detail_Hot: req.body.Product_Detail_Hot,
+        Product_Price_Hot: req.body.Product_Pridce_Hot,
+        Product_Img_Hot: req.body.Product_Img_Hot,
+        Product_Detail_Cold: req.body.Product_Detail_Cold,
+        Product_Price_Cold: req.body.Product_Price_Cold,
+        Product_Img_Cold: req.body.Product_Img_Cold,
+        Product_Detail_Frappe: req.body.Product_Detail_Frappe,
+        Product_Price_Frappe: req.body.Product_Price_Frappe,
+        Product_Img_Frappe: req.body.Product_Img_Frappe
     })
     try {
         const newProduct = await product.save();
@@ -35,31 +42,6 @@ router.post('/create', async (req, res) => {
         res.status(400).json({ message: err.message});
     }
 });
-
-// router.post('/create', async (req, res) => {
-//     const product = new Product({
-//         Product_Name: req.body.Product_Name,
-//         Product_Type: req.body.Product_Type,
-//         Product_IsHot: req.body.Product_IsHot,
-//         Product_IsCold: req.body.Product_IsCold,
-//         Product_IsFrappe: req.body.Product_IsFrappe,
-//         Product_Detail: req.body.Product_Detail,
-//         Product_Detail_Hot: req.body.Product_Detail_Hot,
-//         Product_Detail_Cold: req.body.Product_Detail_Cold,
-//         Product_Detail_Smoothie: req.body.Product_Detail_Smoothie,
-//         Product_Price_Hot: req.body.Product_Price_Hot,
-//         Product_Price_Cold: req.body.Product_Detail_Cold,
-//         Product_Price_Smoothie: req.body.Product_Price_Smoothie,
-//         Product_Img: req.body.Product_Img,
-        
-//     })
-//     try {
-//         const newProduct = await product.save();
-//         res.status(201).json(newProduct);
-//     } catch (err) {
-//         res.status(400).json({ message: err.message});
-//     }
-// });
 
 // Updating One
 router.patch('/patch/:id', getProduct, async (req, res) => {
@@ -78,11 +60,32 @@ router.patch('/patch/:id', getProduct, async (req, res) => {
     if (req.body.Product_IsFrappe != null) {
         res.product.Product_IsFrappe = req.body.Product_IsFrappe
     }
-    if (req.body.Product_Detail != null) {
-        res.product.Product_Detail = req.body.Product_Detail
+    if (req.body.Product_Detail_Hot != null) {
+        res.product.Product_Detail_Hot = req.body.Product_Detail_Hot
     }
-    if (req.body.Product_Img != null) {
-        res.product.Product_Img = req.body.Product_Img
+    if (req.body.Product_Price_Hot != null) {
+        res.product.Product_Price_Hot = req.body.Product_Price_Hot
+    }
+    if (req.body.Product_Img_Hot != null) {
+        res.product.Product_Img_Hot = req.body.Product_Img_Hot
+    }
+    if (req.body.Product_Detail_Cold != null) {
+        res.product.Product_Detail_Cold = req.body.Product_Detail_Cold
+    }
+    if (req.body.Product_Price_Cold != null) {
+        res.product.Product_Price_Cold = req.body.Product_Price_Cold
+    }
+    if (req.body.Product_Img_Cold != null) {
+        res.product.Product_Img_Cold = req.body.Product_Img_Cold
+    }
+    if (req.body.Product_Detail_Frappe != null) {
+        res.product.Product_Detail_Frappe = req.body.Product_Detail_Frappe
+    }
+    if (req.body.Product_Price_Frappe != null) {
+        res.product.Product_Price_Frappe = req.body.Product_Price_Frappe
+    }
+    if (req.body.Product_Img_Frappe != null) {
+        res.product.Product_Img_Frappe = req.body.Product_Img_Frappe
     }
 
     try {
@@ -105,7 +108,6 @@ router.delete('/delete/:id', getProduct, async (req, res) => {
 
 async function getProduct(req, res, next) {
     let product
-    console.log('find param');
     try{
         product = await Product.findById(req.params.id)
         if (product == null) {

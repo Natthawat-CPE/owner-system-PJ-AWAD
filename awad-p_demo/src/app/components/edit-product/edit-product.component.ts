@@ -13,21 +13,35 @@ export class EditProductComponent {
 
 
   product: any;
+  status_Hot?: boolean;
+  status_Cold?: boolean;
+  status_Frappe?: boolean;
+
+  numberType:number[] =[];
+  activePageType!:number;
 
   ProductForm = new FormGroup({
     Product_Name: new FormControl(''),
+    Product_Detail_Hot: new FormControl(''),
+    Product_Price_Hot: new FormControl(''),
+    Product_Img_Hot: new FormControl(''),
+  });
+
+  //TODO For HTML
+  ProductFormDisplay = new FormGroup({
+    Product_Name: new FormControl(''),
     Product_Detail: new FormControl(''),
+    Product_Price: new FormControl(''),
     Product_Img: new FormControl(''),
   });
 
-  // Product_Img = new FormControl('');
-
-
-  // dataPatch = new FormGroup({
-  //   Product_Name: new FormControl(this.ProductForm.controls['Product_Name'].value),
-  //   Product_Detail: new FormControl(this.ProductForm.controls['Product_Detail'].value),
-  //   Product_Img: new FormControl(this.Product_Img),
-  // });
+  //TODO For Save DB 
+  ProductFormSave = new FormGroup({
+    Product_Name: new FormControl(''),
+    Product_Detail: new FormControl(''),
+    Product_Price: new FormControl(''),
+    Product_Img: new FormControl(''),
+  });
 
 
   previewLoaded: boolean = false;
@@ -47,6 +61,55 @@ export class EditProductComponent {
   ngOnInit(): void {
   }
 
+  // TODO for changeNameFormControl and pull Data
+  renameFormControlAndPull(formGroup:FormGroup, oldName:string, newName:string) {
+    // ดึงค่า FormControl จากชื่อเดิม
+    const oldControl = formGroup.get(oldName);
+
+    // สร้าง FormControl ใหม่ด้วยค่าเดิม
+    const newControl = new FormControl(oldControl?.value);
+
+    // ลบ FormControl เดิมออกจาก FormGroup
+    formGroup.removeControl(oldName);
+
+    // เพิ่ม FormControl ใหม่เข้าไปด้วยชื่อใหม่
+    formGroup.addControl(newName, newControl);
+}
+
+  // TODO for changeNameFormControl ONLY !!!
+  renameFormControl(formGroup:FormGroup, oldName:string, newName:string) {
+    // สร้าง FormControl ใหม่ด้วยค่าเดิม
+    const newControl = new FormControl('');
+    // ลบ FormControl เดิมออกจาก FormGroup
+    formGroup.removeControl(oldName);
+    // เพิ่ม FormControl ใหม่เข้าไปด้วยชื่อใหม่
+    formGroup.addControl(newName, newControl);
+}
+
+  checkData(){
+    try{
+      if (this.product.Product_IsHot == true){
+        this.numberType.push(1);
+      }
+      if (this.product.Product_IsCold == true){
+        this.numberType.push(2);
+      }
+      if (this.product.Product_IsFrappe == true){
+        this.numberType.push(3);
+      }
+      this.activePageType = this.numberType[0];
+
+      if (this.activePageType == 1) {
+        
+
+      }
+      
+
+
+    } catch(err){
+      console.log(err);
+    }
+  }
   getOneProduct() {
      try{
       let product_id = this.activatedRoute.snapshot.paramMap.get('id');
@@ -64,42 +127,25 @@ export class EditProductComponent {
     }
   }
 
+
+
+
+
+
+
+
   loadData(){
     try {
       this.ProductForm.patchValue({
         Product_Name: this.product.Product_Name,
-        Product_Detail: this.product.Product_Detail,
-        Product_Img: this.product.Product_Img
+        Product_Detail_Hot: this.product.Product_Detail_Hot,
+        Product_Price_Hot: this.product.Product_Price_Hot,
+        Product_Img_Hot: this.product.Product_Img_Hot
       });
     } catch(err) {
       console.log(err);
     }
   }
-
-
-  // onChangeImg(e:any){
-  //     const file = e.target.files[0];
-  //     var pattern = /image-*/;
-  //     const reader = new FileReader();
-  //     if (!file.type.match(pattern)) {
-  //       alert('invalid format');
-  //       // this.Product_Img.reset();
-  //       this.ProductForm.patchValue({
-  //         Product_Img: null,
-  //       });
-  //     } 
-  //     else { 
-  //       reader.readAsDataURL(file);
-  //       reader.onload = () => {
-  //         this.previewLoaded = true;
-  //         // const imageValue = reader.result ? reader.result.toString() : null;
-  //         // this.Product_Img.setValue(imageValue);
-  //         this.ProductForm.patchValue({
-  //           Product_Img: reader.result?.toString()
-  //         })
-  //       }
-  //     }
-  // }
 
 
   onChangeImg(e:any){
@@ -110,7 +156,7 @@ export class EditProductComponent {
       reader.onload = () => {
         this.previewLoaded = true;
         this.ProductForm.patchValue({
-          Product_Img: reader.result?.toString()
+          Product_Img_Hot: reader.result?.toString()
         })
       }
     }
@@ -127,39 +173,6 @@ export class EditProductComponent {
         console.log(err);
       }
     );
-
-    // if (this.Product_Img != null) {
-    //   this.productService.updateProduct(product_id ,this.Product_Img.value).subscribe(
-    //     data => {
-    //       console.log(data)
-    //     },
-    //     err => {
-    //       console.log(err);
-    //     }
-    //   );
-
-    // }
   }
 
-  // updateProduct() {
-  //   let product_id = this.activatedRoute.snapshot.paramMap.get('id');
-  //   let productData = this.ProductForm.value;
-  //   console.log('TEST');
-  //   return this.http.patch<any>(`http://localhost:3000/products/patch/${product_id}`, productData)
-  //     .pipe(map(data => {
-  //       return data;
-  //     }));
-  // }
-
-
-
-  // getOneProduct() {
-  //   let product_id = this.activatedRoute.snapshot.paramMap.get('id');
-  //   console.log(typeof product_id)
-  //   this.http.get<any>(`http://localhost:3000/products/${product_id}`).subscribe(
-  //     response => {
-  //       this.product = response;
-  //       console.log(this.product);
-  //     })
-  // }
 }

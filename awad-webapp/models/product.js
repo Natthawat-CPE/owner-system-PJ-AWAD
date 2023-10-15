@@ -21,11 +21,39 @@ const productSchema = new mongoose.Schema({
         type: Boolean,
         required: true
     },
-    Product_Detail: {
+    Product_Detail_Hot: {
         type: String,
         require: true
     },
-    Product_Img: {
+    Product_Price_Hot: {
+        type: Number,
+        require: true
+    },
+    Product_Img_Hot: {
+        type: String,
+        required: true
+    },
+    Product_Detail_Cold: {
+        type: String,
+        require: true
+    },
+    Product_Price_Cold: {
+        type: Number,
+        require: true
+    },
+    Product_Img_Cold: {
+        type: String,
+        required: true
+    },
+    Product_Detail_Frappe: {
+        type: String,
+        require: true
+    },
+    Product_Price_Frappe: {
+        type: Number,
+        require: true
+    },
+    Product_Img_Frappe: {
         type: String,
         required: true
     }
