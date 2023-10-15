@@ -11,42 +11,23 @@ import { FormControl, FormGroup, FormArray, Validators, FormBuilder } from '@ang
 })
 export class EditProductComponent {
 
-
   product: any;
   status_Hot?: boolean;
   status_Cold?: boolean;
   status_Frappe?: boolean;
 
   numberType:number[] =[];
-  activePageType!:number;
+  activePageType?:number;
 
+   //TODO For HTML
   ProductForm = new FormGroup({
     Product_Name: new FormControl(''),
-    Product_Detail_Hot: new FormControl(''),
-    Product_Price_Hot: new FormControl(''),
-    Product_Img_Hot: new FormControl(''),
-  });
-
-  //TODO For HTML
-  ProductFormDisplay = new FormGroup({
-    Product_Name: new FormControl(''),
     Product_Detail: new FormControl(''),
     Product_Price: new FormControl(''),
     Product_Img: new FormControl(''),
   });
-
-  //TODO For Save DB 
-  ProductFormSave = new FormGroup({
-    Product_Name: new FormControl(''),
-    Product_Detail: new FormControl(''),
-    Product_Price: new FormControl(''),
-    Product_Img: new FormControl(''),
-  });
-
 
   previewLoaded: boolean = false;
-
-  
 
   constructor
   (
@@ -62,27 +43,10 @@ export class EditProductComponent {
   }
 
   // TODO for changeNameFormControl and pull Data
-  renameFormControlAndPull(formGroup:FormGroup, oldName:string, newName:string) {
-    // ดึงค่า FormControl จากชื่อเดิม
-    const oldControl = formGroup.get(oldName);
-
-    // สร้าง FormControl ใหม่ด้วยค่าเดิม
-    const newControl = new FormControl(oldControl?.value);
-
-    // ลบ FormControl เดิมออกจาก FormGroup
-    formGroup.removeControl(oldName);
-
-    // เพิ่ม FormControl ใหม่เข้าไปด้วยชื่อใหม่
-    formGroup.addControl(newName, newControl);
-}
-
-  // TODO for changeNameFormControl ONLY !!!
   renameFormControl(formGroup:FormGroup, oldName:string, newName:string) {
-    // สร้าง FormControl ใหม่ด้วยค่าเดิม
-    const newControl = new FormControl('');
-    // ลบ FormControl เดิมออกจาก FormGroup
+    const oldControl = formGroup.get(oldName);
+    const newControl = new FormControl(oldControl?.value);
     formGroup.removeControl(oldName);
-    // เพิ่ม FormControl ใหม่เข้าไปด้วยชื่อใหม่
     formGroup.addControl(newName, newControl);
 }
 
@@ -97,18 +61,30 @@ export class EditProductComponent {
       if (this.product.Product_IsFrappe == true){
         this.numberType.push(3);
       }
-      this.activePageType = this.numberType[0];
+      if (this.activePageType == undefined || this.activePageType == null ) {
+        this.activePageType = this.numberType[0];
+      }
 
       if (this.activePageType == 1) {
-        
-
+        this.loadData("Hot");
+      } else if (this.activePageType == 2) {
+        this.loadData("Cold");
+      } else {
+        this.loadData("Frappe");
       }
-      
-
 
     } catch(err){
       console.log(err);
     }
+  }
+
+  setActivePageType(Type:string){
+    if (Type == "Hot"){
+      this.activePageType = 1;
+    } else if (Type == "Cold") {
+      this.activePageType = 2;
+    } else {this.activePageType = 3;}
+    this.checkData();
   }
   getOneProduct() {
      try{
@@ -116,7 +92,7 @@ export class EditProductComponent {
       this.productService.restOneProduct(product_id).subscribe(
         data => {
           this.product = data;
-          this.loadData();
+          this.checkData();
         },
         err => {
           console.log(err);
@@ -127,25 +103,45 @@ export class EditProductComponent {
     }
   }
 
-
-
-
-
-
-
-
-  loadData(){
-    try {
+  loadData(Type:string){
+    if (Type == "Hot"){
+      try {
       this.ProductForm.patchValue({
         Product_Name: this.product.Product_Name,
-        Product_Detail_Hot: this.product.Product_Detail_Hot,
-        Product_Price_Hot: this.product.Product_Price_Hot,
-        Product_Img_Hot: this.product.Product_Img_Hot
+        Product_Detail: this.product.Product_Detail_Hot,
+        Product_Price: this.product.Product_Price_Hot,
+        Product_Img: this.product.Product_Img_Hot
       });
-    } catch(err) {
-      console.log(err);
+      } catch(err) {
+        console.log(err);
+      }
+
+    } else if (Type == "Cold") {
+      try{
+        this.ProductForm.patchValue({
+          Product_Name: this.product.Product_Name,
+          Product_Detail: this.product.Product_Detail_Cold,
+          Product_Price: this.product.Product_Price_Cold,
+          Product_Img: this.product.Product_Img_Cold
+        });
+      } catch(err) {
+        console.log(err);
+      }
+
+    } else if (Type == "Frappe") {
+      try{
+      this.ProductForm.patchValue({
+        Product_Name: this.product.Product_Name,
+        Product_Detail: this.product.Product_Detail_Frappe,
+        Product_Price: this.product.Product_Price_Frappe,
+        Product_Img: this.product.Product_Img_Frappe
+      });
+      } catch(err) {
+        console.log(err);
+      }
     }
-  }
+  } 
+
 
 
   onChangeImg(e:any){
@@ -156,15 +152,15 @@ export class EditProductComponent {
       reader.onload = () => {
         this.previewLoaded = true;
         this.ProductForm.patchValue({
-          Product_Img_Hot: reader.result?.toString()
+          Product_Img: reader.result?.toString()
         })
       }
     }
   }
 
   updateProduct() {
+    this.renameFromGroup();
     let product_id = this.activatedRoute.snapshot.paramMap.get('id');
-    console.log(this.ProductForm.value);
     this.productService. updateProduct (product_id ,this.ProductForm.value).subscribe(
        data => {
         console.log(data)
@@ -173,6 +169,34 @@ export class EditProductComponent {
         console.log(err);
       }
     );
+  }
+
+  deleteProduct() {
+    let product_id = this.activatedRoute.snapshot.paramMap.get('id');
+    this.productService.deleteProduct (product_id).subscribe(
+       data => {
+        console.log(data)
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+
+  renameFromGroup(){
+    if (this.activePageType == 1){
+      this.renameFormControl(this.ProductForm, "Product_Detail", "Product_Detail_Hot");
+      this.renameFormControl(this.ProductForm, "Product_Price", "Product_Price_Hot");
+      this.renameFormControl(this.ProductForm, "Product_Img", "Product_Img_Hot");
+    } else if (this.activePageType == 2) {
+      this.renameFormControl(this.ProductForm, "Product_Detail", "Product_Detail_Cold");
+      this.renameFormControl(this.ProductForm, "Product_Price", "Product_Price_Cold");
+      this.renameFormControl(this.ProductForm, "Product_Img", "Product_Img_Cold");
+    } else {
+      this.renameFormControl(this.ProductForm, "Product_Detail", "Product_Detail_Frappe");
+      this.renameFormControl(this.ProductForm, "Product_Price", "Product_Price_Frappe");
+      this.renameFormControl(this.ProductForm, "Product_Img", "Product_Img_Frappe");
+    }
   }
 
 }

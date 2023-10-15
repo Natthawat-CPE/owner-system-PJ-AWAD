@@ -19,37 +19,34 @@
     
     <div class="row">
             
-            <div class="col-5" style="margin: auto ;"  >
+            <div class="col-6 my-auto"   >
                 <div class="d-flex justify-content-center">
-                    <img src="{{product.Product_Img_Hot}}" width="70%" >
+                    <img src="{{this.ProductForm.value.Product_Img}}" width="70%" >
                 </div>
                 <br>
                 <br>
                 
                 <div  class="d-flex justify-content-center" >
-                    <a routerLink="/products" (click)="updateProduct()" class=" mx-2 btn btn-success" ><h6>Uadate</h6></a>
-                    <a routerLink="/products" (click)="updateProduct()" class=" mx-2 btn btn-success" ><h6>Uadate</h6></a>
-                    <a routerLink="/products" (click)="updateProduct()" class=" mx-2 btn btn-success" ><h6>Uadate</h6></a>
+                    <a  (click)="setActivePageType('Hot')" class=" mx-2 btn btn-success" *ngIf="product.Product_IsHot" ><h6>Hot</h6></a>
+                    <a  (click)="setActivePageType('Cold')" class=" mx-2 btn btn-success" *ngIf="product.Product_IsCold" ><h6>Cold</h6></a>
+                    <a  (click)="setActivePageType('Frappe')" class=" mx-2 btn btn-success" *ngIf="product.Product_IsFrappe" ><h6>Frappe</h6></a>
                 </div>
             </div>
 
-            <div class="col-5" style="margin-right: auto;"  >
+            <div class="col-5 "   >
                 <form [formGroup]="ProductForm">
-                    <div class="form-group">
+                    <div class="form-group ">
                         <label ><h6>ProductName :</h6></label>
                         <input type="text" class="form-control" formControlName="Product_Name">
                         <br>
                         <label ><h6>ProductDetail :</h6></label>
-                        <!-- <input type="text" class="form-control" formControlName="Product_Detail"> -->
-                        <textarea class="form-control" formControlName="Product_Detail_Hot" cols="10" rows="4"></textarea>
+                        <textarea class="form-control" formControlName="Product_Detail" cols="10" rows="4"></textarea>
                         <br>
                         <label ><h6>ProductPrice :</h6></label>
-                        <input type="number" class="form-control" formControlName="Product_Price_Hot">
+                        <input type="number" class="form-control" formControlName="Product_Price">
                         <br>
                         <label ><h6>Chang photo :</h6></label>
-                        <!-- <input type="file" class="form-control" [formControl]="Product_Img" > -->
-                        <!-- <input type="file" class="form-control" formControlName="Product_Img"  (change)="onChangeImg($event)"> -->
-                        <input class="form-control" type="file" formControlName="Product_Img_Hot"  (change)="onChangeImg($event)">
+                        <input class="form-control" type="file" formControlName="Product_Img"  (change)="onChangeImg($event)">
                     </div>
                 </form>
 
@@ -57,13 +54,15 @@
                     <div class="col-md-3">
 
                     </div>
-                    <div class="col-md-9">
-                        <img *ngIf="previewLoaded" class="img-thumbnail" [src]="this.ProductForm.value.Product_Img_Hot" style="height:150px;">
-                    </div>
+                    <!-- <div class="col-md-9">
+                        <img *ngIf="previewLoaded" class="img-thumbnail" [src]="this.ProductForm.value.Product_Img" style="height:150px;">
+                    </div> -->
                 </div>
 
+                <br>
 
                 <a routerLink="/products" (click)="updateProduct()" class="btn btn-success float-right" style="margin-bottom: 5%;"><h6>Uadate</h6></a>
+                <a routerLink="/products" (click)="deleteProduct()" class="btn btn-danger float-left" style="margin-bottom: 5%;"><h6>Delete-Product</h6></a>
             </div>
     </div>
 
