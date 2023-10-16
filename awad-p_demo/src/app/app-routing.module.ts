@@ -9,10 +9,12 @@ import { MenuComponent } from './components/menu/menu.component';
 import { HomeComponent } from './components/home/home.component';
 import { GoodsComponent } from './components/goods/goods.component';
 import { EditProductComponent } from './components/edit-product/edit-product.component';
+import { MyFavoriteComponent } from './components/my-favorite/my-favorite.component';
 
 const routes: Routes = [
   { path: 'products', component: ProductsComponent },
   { path: 'home', component: HomeComponent },
+  { path: 'myFavorite', component: MyFavoriteComponent },
   { path: '', redirectTo: 'home', pathMatch:'full' },
   // เดิม
   // { path: 'products/goods/:id', component: GoodsComponent },

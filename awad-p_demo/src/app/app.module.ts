@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { ProductsComponent } from './components/products/products.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+// import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { HomeComponent } from './components/home/home.component';
 import { GoodsComponent } from './components/goods/goods.component';
 import { SearchComponent } from './components/search/search.component';
@@ -19,6 +20,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { EditProductComponent } from './components/edit-product/edit-product.component';
 import { CartIconComponent } from './components/cart-icon/cart-icon.component';
+import { MyFavoriteIconComponent } from './components/my-favorite-icon/my-favorite-icon.component';
+import { MyFavoriteComponent } from './components/my-favorite/my-favorite.component';
 
 @NgModule({
   declarations: [
@@ -32,12 +35,15 @@ import { CartIconComponent } from './components/cart-icon/cart-icon.component';
     ProducttypeDetailComponent,
     CreateproducttypeComponent,
     EditProductComponent,
-    CartIconComponent
+    CartIconComponent,
+    MyFavoriteIconComponent,
+    MyFavoriteComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FontAwesomeModule,
+    // AngularFontAwesomeModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,

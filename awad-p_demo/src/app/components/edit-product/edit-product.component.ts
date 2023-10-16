@@ -3,7 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from 'src/app/services/products.service';
 
 // TODO cart icon
-import { CartService } from 'src/app/services/cart.service';
+// import { CartService } from 'src/app/services/cart.service';
+import { MyFavoriteService } from 'src/app/services/my-favorite.service';
+// TODO -- End --
 
 import { FormControl, FormGroup, FormArray, Validators, FormBuilder } from '@angular/forms';
 
@@ -37,7 +39,9 @@ export class EditProductComponent {
     private productService: ProductsService,
     private activatedRoute: ActivatedRoute,
     // TODO cart icon
-    private cartService:CartService
+    // private cartService:CartService,
+    private myFavoriteService:MyFavoriteService
+    // TODO -- End --
   ) 
   
   {
@@ -57,8 +61,9 @@ export class EditProductComponent {
   // TODO cart icon
   addProductToCart(){
     let product_id = this.activatedRoute.snapshot.paramMap.get('id');
-    this.cartService.add(product_id!)
+    this.myFavoriteService.add(product_id!)
   }
+  // TODO -- End --
 
   checkData(){
     try{
