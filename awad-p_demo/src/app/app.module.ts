@@ -18,6 +18,7 @@ import { CreateproducttypeComponent } from './components/createproducttype/creat
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { EditProductComponent } from './components/edit-product/edit-product.component';
+import { CartIconComponent } from './components/cart-icon/cart-icon.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { EditProductComponent } from './components/edit-product/edit-product.com
     ShowproducttypeComponent,
     ProducttypeDetailComponent,
     CreateproducttypeComponent,
-    EditProductComponent
+    EditProductComponent,
+    CartIconComponent
   ],
   imports: [
     BrowserModule,

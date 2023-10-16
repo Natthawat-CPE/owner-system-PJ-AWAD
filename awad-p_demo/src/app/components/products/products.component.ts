@@ -4,6 +4,7 @@ import { ProductsService } from 'src/app/services/products.service';
 import { ProductTypeService } from 'src/app/services/product-type.service';
 import { HttpClient } from '@angular/common/http';
 
+
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',

@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from 'src/app/services/products.service';
 
+// TODO cart icon
+import { CartService } from 'src/app/services/cart.service';
+
 import { FormControl, FormGroup, FormArray, Validators, FormBuilder } from '@angular/forms';
 
 @Component({
@@ -19,7 +22,7 @@ export class EditProductComponent {
   numberType:number[] =[];
   activePageType?:number;
 
-   //TODO For HTML
+
   ProductForm = new FormGroup({
     Product_Name: new FormControl(''),
     Product_Detail: new FormControl(''),
@@ -33,6 +36,8 @@ export class EditProductComponent {
   (
     private productService: ProductsService,
     private activatedRoute: ActivatedRoute,
+    // TODO cart icon
+    private cartService:CartService
   ) 
   
   {
@@ -42,13 +47,18 @@ export class EditProductComponent {
   ngOnInit(): void {
   }
 
-  // TODO for changeNameFormControl and pull Data
   renameFormControl(formGroup:FormGroup, oldName:string, newName:string) {
     const oldControl = formGroup.get(oldName);
     const newControl = new FormControl(oldControl?.value);
     formGroup.removeControl(oldName);
     formGroup.addControl(newName, newControl);
 }
+
+  // TODO cart icon
+  addProductToCart(){
+    let product_id = this.activatedRoute.snapshot.paramMap.get('id');
+    this.cartService.add(product_id!)
+  }
 
   checkData(){
     try{

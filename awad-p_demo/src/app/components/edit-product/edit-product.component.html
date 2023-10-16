@@ -1,9 +1,12 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
-<title>Bootstrap Example</title>
+<link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="https://kit.fontawesome.com/37b4520f8a.js" crossorigin="anonymous"></script> -->
+<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script> -->
+
 <br>
-<div class="card" style="width: 90%; background-color: #fde8c5; margin:auto;  background-attachment: scroll; margin-top:1%">
+<div class="card" style="width: 90%; background-color: #fde8c5; margin:auto;  background-attachment: scroll; margin-top: 1%; margin-bottom: 3%;">
 
 
 
@@ -31,6 +34,8 @@
                     <a  (click)="setActivePageType('Cold')" class=" mx-2 btn btn-success" *ngIf="product.Product_IsCold" ><h6>Cold</h6></a>
                     <a  (click)="setActivePageType('Frappe')" class=" mx-2 btn btn-success" *ngIf="product.Product_IsFrappe" ><h6>Frappe</h6></a>
                 </div>
+                <br>
+                <br>
             </div>
 
             <div class="col-5 "   >
@@ -60,10 +65,20 @@
                 </div>
 
                 <br>
+                <div >
+                    <a routerLink="/products" (click)="updateProduct()" class="btn btn-success float-right" style="margin-bottom: 5%;"><h6>Uadate</h6></a>
+                    <a routerLink="/products" (click)="deleteProduct()" class="btn btn-danger float-left" style="margin-bottom: 5%;"><h6>Delete-Product</h6></a>
+                </div>
 
-                <a routerLink="/products" (click)="updateProduct()" class="btn btn-success float-right" style="margin-bottom: 5%;"><h6>Uadate</h6></a>
-                <a routerLink="/products" (click)="deleteProduct()" class="btn btn-danger float-left" style="margin-bottom: 5%;"><h6>Delete-Product</h6></a>
+                <!-- TODO สำหรับการทำแบบจำลอง add Cart เท่านั้น -->
+                <div >
+                    <a class="btn btn-outline-primary" role="button" (click)="addProductToCart()">
+                        <i class="fa fa-cart-plus">Add to cart +</i>
+                      ></a>
+                </div>
+                <!-- TODO **End** -->
             </div>
+            
     </div>
 
 
